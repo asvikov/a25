@@ -123,4 +123,6 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    'pay_per_hour' => env('PAY_PER_HOUR', 0),
+
 ];
