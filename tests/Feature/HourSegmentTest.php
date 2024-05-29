@@ -18,10 +18,7 @@ class HourSegmentTest extends TestCase
     {
         $employee = Employee::factory()->create();
 
-        $token = $employee->createToken('bearer_token')->plainTextToken;
-
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer '.$token,
             'Accept' => 'application/json'
         ])
             ->post('/api/salary', [
@@ -40,18 +37,13 @@ class HourSegmentTest extends TestCase
 
     public function test_all_paid_hour_segment(): void {
 
-        $user = User::factory()->create();
-
         $employee = Employee::factory()->create();
 
         HourSegment::factory()->create([
             'employee_id' => $employee->id
         ]);
 
-        $token = $user->createToken('bearer_token')->plainTextToken;
-
         $response = $this->withHeaders([
-            'Authorization' => 'Bearer '.$token,
             'Accept' => 'application/json'
         ])
             ->post('/api/employees/'.$employee->id.'/payall');
@@ -86,6 +78,5 @@ class HourSegmentTest extends TestCase
         $response->assertJsonFragment([
             'employee_id' => $employee_2->id
         ]);
-        //$response->assertJsonPath('data.[0].employee_id', $employee_2->id);
     }
 }
